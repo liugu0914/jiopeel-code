@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    #数据源类型
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lyc?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin123
+code:
+  author: lyc
+  view:
+    suffix: .html  #生成模板的后缀
+    path: /src/main/resources/
+  java:
+    path: /src/main/java/

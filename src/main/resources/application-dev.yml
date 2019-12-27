@@ -1,0 +1,15 @@
+server:
+  port: 8066 #服务端口
+spring:
+  freemarker:
+    request-context-attribute: req
+    content-type: text/html
+    enabled: true
+    cache: false #缓存配置
+    template-loader-path: classpath:/templates/ #模板加载路径 按需配置
+    charset: UTF-8 #编码格式
+    suffix: .html
+mybatis:
+  mapper-locations: classpath:com/lyc/dao/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
