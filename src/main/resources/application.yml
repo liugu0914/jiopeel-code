@@ -12,6 +12,6 @@ code:
   author: lyc
   view:
     suffix: .html  #生成模板的后缀
-    path: /src/main/resources/
+    path: /templates/sys
   java:
-    path: /src/main/java/
+    path: /sys
