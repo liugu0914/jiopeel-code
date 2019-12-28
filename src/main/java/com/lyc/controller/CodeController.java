@@ -1,12 +1,14 @@
 package com.lyc.controller;
 
 import com.lyc.service.CodeService;
-import com.lyc.sys.Sys;
+import com.lyc.bean.Sys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -32,6 +34,16 @@ public class CodeController {
     public String index(Model model)  {
         model.addAttribute("tabs",codeService.queryAlltable());
         model.addAttribute("sys",sys);
+        return "index";
+    }
+
+    /**
+     * 提交
+     */
+    @ResponseBody
+    @PostMapping("/submit")
+    public String submit(@ModelAttribute Sys sys) throws Exception {
+        codeService.submit(sys);
         return "index";
     }
 

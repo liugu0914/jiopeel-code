@@ -21,7 +21,7 @@ import java.util.*;
 @Slf4j
 public class BaseUtil {
 
-    protected static final Logger sys = LogManager.getLogger("sys");
+    protected static final Logger sys = LogManager.getLogger("html");
 
 
     /**
@@ -381,6 +381,18 @@ public class BaseUtil {
         Field[] fields = new Field[fieldList.size()];
         fieldList.toArray(fields);
         return fields;
+    }
+
+    /**
+     * 产生随机数
+     */
+    public static String getRandom(int len) {
+        StringBuffer sBuffer = new StringBuffer();
+        Random random = new Random();
+        for (int i = 0; i < len; i++) {
+            sBuffer.append(random.nextInt(10));
+        }
+        return sBuffer.toString();
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.lyc.dao;
 
-import com.lyc.sys.Base;
+import com.lyc.bean.Base;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.annotation.Resource;

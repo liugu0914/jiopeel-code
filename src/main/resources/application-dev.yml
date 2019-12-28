@@ -11,5 +11,5 @@ spring:
     suffix: .html
 mybatis:
   mapper-locations: classpath:com/lyc/dao/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

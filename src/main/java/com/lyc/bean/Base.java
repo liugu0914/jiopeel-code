@@ -1,8 +1,9 @@
-package com.lyc.sys;
+package com.lyc.bean;
 
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -23,4 +24,5 @@ public class Base implements Serializable {
      * 修改时间
      */
     private Date updatedt;
+
 }

@@ -12,6 +12,6 @@ code:
   author: lyc
   view:
     suffix: .html  #生成模板的后缀
-    path: /templates/sys
+    path: F:/lkk/SpringbootDEMO/src/main/resources/templates/sys
   java:
-    path: /sys
+    path: F:/lkk/SpringbootDEMO/src/main/java/com/jiopeel/sys

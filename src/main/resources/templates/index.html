@@ -7,7 +7,7 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
 
-<!--    <link href="bootstrap/css/icons.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--    <link href="bootstrap/css/icons.min.css" rel="stylesheet" type="text/css"/>-->
     <link href="bootstrap/css/app.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -19,127 +19,64 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h2 ><code>Jiopeel.com</code>&nbsp;&nbsp;代码生成器</h2>
+                        <h2><code>Jiopeel.com</code>&nbsp;&nbsp;代码生成器</h2>
                         <h4><code>Design by lyc</code></h4>
                         <p class="text-muted">
                             简介： 你可以在此处生成代码
                         </p>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form method="post" action="#">
+                                <form id="form">
                                     <div class="form-group mb-3">
-                                        <button type="submit" class="btn btn-success col-lg-12">Submit</button>
+                                        <button type="button" id="sumbtn" class="btn btn-success col-lg-12">Submit
+                                        </button>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="tabname">表名</label>
-                                        <select id="tabname" class="form-control">
+                                        <label for="tabName">表名</label>
+                                        <select id="tabName" name="tabName" class="form-control">
                                             <#list tabs?if_exists as tab>
-                                            <option value="${tab!''}">${tab!''}</option>
-                                            </#list>
+                                            <option value="${(tab.tableName)!''}" des="${(tab.tableComment)!''}">
+                                                ${(tab.tableName)!''}
+                                            </option>
+                                        </#list>
                                         </select>
+                                        <input type="hidden" id="des" name="des" value="">
+                                        <span class="help-block">
+                                            <small></small>
+                                        </span>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="author">作者</label>
-                                        <input type="text" id="author" name="author" class="form-control" value="${sys.author!''}"
+                                        <input type="text" id="author" name="author" class="form-control"
+                                               value="${sys.author!''}"
                                                placeholder="作者">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="javapath">Java文件输出路径</label>
-                                        <input type="text" id="javapath" class="form-control"
-                                               value="password">
+                                        <label for="author">实例名称</label>
+                                        <input type="text" id="beanName" name="beanName" class="form-control" readonly
+                                               placeholder="实例名称">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="example-password">Java文件输出路径</label>
-                                        <input type="password" id="example-password" class="form-control"
-                                               value="password">
+                                        <label for="javaPath">Java文件输出路径</label>
+                                        <div class="input-group">
+                                            <input type="text" id="javaPath" name="javaPath" class="form-control"
+                                                   value="${sys.javaPath!''}">
+                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="example-palaceholder">模板文件输出路径</label>
-                                        <input type="text" id="example-palaceholder" class="form-control"
-                                               placeholder="placeholder">
+                                        <label for="viewPath">模板文件输出路径</label>
+                                        <div class="input-group">
+                                            <input type="text" id="viewPath" name="viewPath" class="form-control"
+                                                   value="${sys.viewPath!''}">
+                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="example-textarea">Text area</label>
-                                        <textarea class="form-control" id="example-textarea" rows="5"></textarea>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="example-readonly">Readonly</label>
-                                        <input type="text" id="example-readonly" class="form-control" readonly=""
-                                               value="Readonly value">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="example-disable">Disabled</label>
-                                        <input type="text" class="form-control" id="example-disable" disabled=""
-                                               value="Disabled value">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="example-helping">Helping text</label>
-                                        <input type="text" id="example-helping" class="form-control"
-                                               placeholder="Helping text">
-                                        <span class="help-block">
-                                            <small>A block of help text that breaks onto a new line and may extend beyond one line.</small>
-                                        </span>
+                                        <label for="suffix">模板后缀</label>
+                                        <input type="text" id="suffix" name="suffix" class="form-control"
+                                               placeholder="placeholder" value="${sys.suffix!''}">
                                     </div>
                                 </form>
                             </div>
-<!--                            <div class="col-lg-6">-->
-<!--                                <form>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-select">Input Select</label>-->
-<!--                                        <select class="form-control" id="example-select">-->
-<!--                                            <option>1</option>-->
-<!--                                            <option>2</option>-->
-<!--                                            <option>3</option>-->
-<!--                                            <option>4</option>-->
-<!--                                            <option>5</option>-->
-<!--                                        </select>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-multiselect">Multiple Select</label>-->
-<!--                                        <select id="example-multiselect" multiple class="form-control">-->
-<!--                                            <option>1</option>-->
-<!--                                            <option>2</option>-->
-<!--                                            <option>3</option>-->
-<!--                                            <option>4</option>-->
-<!--                                            <option>5</option>-->
-<!--                                        </select>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-fileinput">Default file input</label>-->
-<!--                                        <input type="file" id="example-fileinput" class="form-control-file">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-date">Date</label>-->
-<!--                                        <input class="form-control" id="example-date" type="date" name="date">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-month">Month</label>-->
-<!--                                        <input class="form-control" id="example-month" type="month" name="month">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-time">Time</label>-->
-<!--                                        <input class="form-control" id="example-time" type="time" name="time">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-week">Week</label>-->
-<!--                                        <input class="form-control" id="example-week" type="week" name="week">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-number">Number</label>-->
-<!--                                        <input class="form-control" id="example-number" type="number" name="number">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-3">-->
-<!--                                        <label for="example-color">Color</label>-->
-<!--                                        <input class="form-control" id="example-color" type="color" name="color"-->
-<!--                                               value="#727cf5">-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group mb-0">-->
-<!--                                        <label for="example-range">Range</label>-->
-<!--                                        <input class="custom-range" id="example-range" type="range" name="range" min="0"-->
-<!--                                               max="100">-->
-<!--                                    </div>-->
-<!--                                </form>-->
-<!--                            </div>-->
                         </div>
 
                     </div>
@@ -151,5 +88,49 @@
 
 
 <script src="/bootstrap/js/app.min.js"></script>
+<script src="/bootstrap/js/ajax.js"></script>
+<script src="/bootstrap/js/message.js"></script>
+<script>
+    $(function () {
+        Code.init();
+    });
+    var Code = {
+        init: function () {
+            $('#tabName').on('change', function (event) {
+                var $this = $(event.target);
+                var name = $this.val().replace("t_", "");
+                $('#beanName').val(Code.under2camel(name));
+                var des = $this.find("option:selected").attr("des");
+                $this.parent().find('small').text(des);
+                $('#des').val(des);
+            });
+            $('#tabName').trigger('change');
+
+            $('#sumbtn').click(function () {
+                Code.submit();
+            });
+        },
+        under2camel: function (s) {
+            var separator = "_";
+            var under = "";
+            s = s.toLowerCase().replace(separator, " ");
+            var sarr = s.split(" ");
+            for (var i = 0; i < sarr.length; i++) {
+                var w = sarr[i].substring(0, 1).toUpperCase() + sarr[i].substring(1);
+                under += w;
+            }
+            return under;
+        },
+        submit: function () {
+            Ajax.post("/submit", $('#form').serialize(), Code.suc, Code.err);
+        },
+        suc: function (res) {
+            console.info(res);
+        },
+        err: function (XMLHttpRequest) {
+            console.info(XMLHttpRequest);
+        }
+    }
+</script>
 </body>
 </html>

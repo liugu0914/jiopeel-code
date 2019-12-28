@@ -1,4 +1,4 @@
-package com.lyc.sys;
+package com.lyc.bean;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,5 +31,21 @@ public class Sys {
      */
     @Value("${code.java.path}")
     private  String javaPath;
+
+
+    /**
+     * 表名
+     */
+    private  String tabName;
+
+    /**
+     * 表描述
+     */
+    private  String des;
+
+    /**
+     * 实例名称
+     */
+    private  String beanName;
 
 }

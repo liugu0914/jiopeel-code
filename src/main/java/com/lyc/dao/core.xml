@@ -2,13 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="core">
-    <select id="all_table" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="all_table" parameterType="java.lang.String" resultType="com.lyc.bean.Table">
             SELECT
-            table_name
+            table_name as tableName,
+            table_comment as tableComment
             FROM
             information_schema. TABLES
             WHERE
             table_schema = DATABASE ()
             ORDER BY table_name
+    </select>
+
+
+    <select id="table_column" parameterType="java.lang.String" resultType="com.lyc.bean.Column">
+            SELECT
+             COLUMN_NAME columnName,
+             COLUMN_TYPE columnType,
+             CHARACTER_MAXIMUM_LENGTH len,
+             IS_NULLABLE isNull,
+             COLUMN_COMMENT remark
+            FROM
+             INFORMATION_SCHEMA. COLUMNS
+            WHERE table_schema=DATABASE()
+            and table_name=#{_paramerter}
     </select>
 </mapper>
