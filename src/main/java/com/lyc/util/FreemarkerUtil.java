@@ -1,5 +1,6 @@
 package com.lyc.util;
 
+import com.lyc.sys.Constant;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -12,8 +13,6 @@ public class FreemarkerUtil {
     private static FreemarkerUtil util;
     private static Configuration cfg;
     private static final String TEMPLATE = "/templates";
-    private static final String JAVA = "/java/";
-    private static final String HTML = "/html/";
 
     public FreemarkerUtil() {
     }
@@ -86,26 +85,14 @@ public class FreemarkerUtil {
 
 
     /**
-     * java文件输出
+     * 文件输出
      *
      * @param map     参数设置
      * @param fname   模板文件
      * @param outpath 输出路径
      */
     public void javaPrint(Map<String, Object> map, String fname, String outpath) {
-        fname = JAVA + fname.replaceFirst("/", "");
-        fPrint(map, fname, outpath);
-    }
-
-    /**
-     * html文件输出
-     *
-     * @param map     参数设置
-     * @param fname   模板文件
-     * @param outpath 输出路径
-     */
-    public void htmlPrint(Map<String, Object> map, String fname, String outpath) {
-        fname = HTML + fname.replaceFirst("/", "");
+        fname = Constant.JAVA + fname.replaceFirst("/", "");
         fPrint(map, fname, outpath);
     }
 }

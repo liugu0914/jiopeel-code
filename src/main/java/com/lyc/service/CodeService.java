@@ -3,6 +3,7 @@ package com.lyc.service;
 import com.lyc.bean.*;
 import com.lyc.dao.BeanDao;
 import com.lyc.sys.Assert;
+import com.lyc.sys.Constant;
 import com.lyc.util.BaseUtil;
 import com.lyc.util.FreemarkerUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,8 @@ public class CodeService {
 
     @Resource
     private BeanDao dao;
+
+    private Map<String, Object> map = new HashMap<String, Object>();
 
     /**
      * @description：查询所有数据表名称
@@ -70,48 +73,87 @@ public class CodeService {
      * @param sys
      * @return String
      */
-    public void submit(Sys sys) throws Exception {
-        Path path = handlePath(sys);
-        doJava(sys,path);
-//        doHtml(sys);
+    public boolean submit(Sys sys) {
+        try {
+            Path path = handlePath(sys);
+            doPrint(sys, path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**
-     * 执行生成java部分
+     * 执行生成文件部分
      *
      * @param sys
      * @return String
      */
-    private void doJava(Sys sys,Path path) {
-        Map<String, Object> map = new HashMap<String, Object>();
+    private void doPrint(Sys sys, Path path) {
         //查询表字段
         List<Column> columns = handleJavacolums(getTableColums(sys.getTabName()));
         map.put("sys", sys);
+        map.put("path", path);
         map.put("serial", new Serial());
         map.put("columns", columns);
+        Map<String, Object> JavaNameMap = (Map<String, Object>) map.get("JavaNameMap");
         FreemarkerUtil freemarkerUtil = FreemarkerUtil.getInstance();
-        freemarkerUtil.sPrint(map, "/java/bean.ftl");
-//        freemarkerUtil.fPrint(map, "/java/bean.ftl", "F:/lkk/jiopeel-code/src/main/java/com/lyc/sys/bean.java");
+        Field[] fields = BaseUtil.getAllFields(path);
+        for (Field field : fields) {
+            String name = field.getName();
+            if (!name.endsWith("File"))
+                continue;
+            name = name.replace("File", "");
+            if (JavaNameMap.containsKey(name))
+                map.put("javaName",JavaNameMap.get(name));
+            field.setAccessible(true);
+            String obj = String.valueOf(getFieldVal(field, path));
+            log.info(obj);
+            freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
+//            freemarkerUtil.javaPrint(map,name+Constant.FILE_FTL,obj);
+        }
     }
 
     /**
      * 处理路径
+     *
      * @param sys
      */
     private Path handlePath(Sys sys) throws Exception {
-        String javaPath=sys.getJavaPath();
-        String viewPath=sys.getViewPath();
-        Assert.isNull(javaPath,"java输出路径不存在");
-        Assert.isNull(viewPath,"模板输出路径不存在");
-        Path path=new Path(javaPath,viewPath+"/"+sys.getBeanName().toLowerCase());
+        String javaPath = sys.getJavaPath();
+        String viewPath = sys.getViewPath();
+        Assert.isNull(javaPath, "java输出路径不存在");
+        Assert.isNull(viewPath, "模板输出路径不存在");
+        String javauri = javaPath.substring(javaPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
+        String htmluri = viewPath.substring(viewPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
+        sys.setJavauri(javauri);
+        sys.setHtmluri(htmluri);
+        sys.setLowbeanName(sys.getBeanName().toLowerCase());//mapper ， html
+        Path path = new Path(sys);
         Field[] fields = BaseUtil.getAllFields(path);
+        String javaName = "";
+        Map<String, Object> JavaNameMap = new HashMap<String, Object>();
         for (Field field : fields) {
+            String name = field.getName();
             field.setAccessible(true);
-            Object obj = getFieldVal(field, path);
-            File file=new File(String.valueOf(obj));
-            if (!file.exists())
-                file.mkdirs();
+            String obj = String.valueOf(getFieldVal(field, path));
+            if (name.endsWith("File")){
+                name = name.replace("File", "");
+                javaName = obj.substring(obj.lastIndexOf(Constant.FILE_DIVISION) + 1)
+                        .replace(Constant.FILE_JAVA, "")
+                        .replace(sys.getSuffix(), "");
+                JavaNameMap.put(name, javaName);
+            }
+            if (name.endsWith("File") || name.endsWith("Path"))
+                continue;
+            File file = new File(obj);
+            if (!file.exists()) {
+                log.info(file.getPath());
+//                file.mkdirs();
+            }
         }
+        map.put("JavaNameMap", JavaNameMap);
         return path;
     }
 
@@ -123,7 +165,7 @@ public class CodeService {
      * @auhor:lyc
      * @Date:2019/12/21 11:48
      */
-    private  Object getFieldVal(Field field, Path path) {
+    private Object getFieldVal(Field field, Path path) {
         field.setAccessible(true);
         Object obj = null;
         try {
@@ -145,20 +187,12 @@ public class CodeService {
 
     /**
      * 根据表名查询表字段
+     *
      * @param tabname
      * @return List<Column>
      */
     private List<Column> getTableColums(String tabname) {
         return dao.query("core.table_column", tabname);
-    }
-
-    /**
-     * 执行生成html部分
-     *
-     * @param sys
-     * @return String
-     */
-    private void doHtml(Sys sys) {
     }
 
     /**

@@ -3,26 +3,43 @@ package com.lyc.bean;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 public class Base implements Serializable {
 
-    private static final long serialVersionUID = -1968010822265820703L;
+    private static final long serialVersionUID = -3540383839044057287L;
 
-    public Base(){
-        this.updatedt=new Date();
-        this.createdt=new Date();
+    public Base() {
+    }
+
+    public Base(Integer code, String message) {
+        this.status = code;
+        this.message = message;
+    }
+
+    public Base(Integer code, String message, Object data) {
+        this.status = code;
+        this.message = message;
+        this.data = data;
     }
     /**
-     * 创建时间
+     * 数据返回
      */
-    private Date createdt;
+    private Object data;
 
     /**
-     * 修改时间
+     * 状态码
      */
-    private Date updatedt;
+    private Integer status;
+
+    /**
+     * 消息通知
+     */
+    private String message;
+
+    /**
+     * 返回成功或失败
+     */
+    private boolean result = true;
 
 }

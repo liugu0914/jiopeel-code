@@ -18,12 +18,12 @@
             SELECT
              COLUMN_NAME columnName,
              COLUMN_TYPE columnType,
-             CHARACTER_MAXIMUM_LENGTH len,
              IS_NULLABLE isNull,
              COLUMN_COMMENT remark
             FROM
              INFORMATION_SCHEMA. COLUMNS
             WHERE table_schema=DATABASE()
             and table_name=#{_paramerter}
+            and COLUMN_NAME not in ('id','ctime','updtime')
     </select>
 </mapper>

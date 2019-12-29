@@ -15,11 +15,6 @@ public class Column {
     private String columnType;
 
     /**
-     * 长度
-     */
-    private Integer len;
-
-    /**
      * 是否为空
      */
     private String isNull;

@@ -1,12 +1,13 @@
 package com.lyc.dao;
 
 import com.lyc.bean.Base;
+import com.lyc.bean.Bean;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-public abstract class BaseDao<T extends Base> {
+public abstract class BaseDao<T extends Bean> {
 
     @Resource
     public SqlSession sqlSession;

@@ -8,10 +8,18 @@ spring:
     url: jdbc:mysql://localhost:3306/lyc?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: admin123
+#code:
+#  author: lyc
+#  view:
+#    suffix: .html  #生成模板的后缀
+#    path: F:/lkk/SpringbootDEMO/src/main/resources/templates/sys
+#  java:
+#    path: F:/lkk/SpringbootDEMO/src/main/java/com/jiopeel/sys
 code:
+  company: com.jiopeel  #公司名
   author: lyc
   view:
     suffix: .html  #生成模板的后缀
-    path: F:/lkk/SpringbootDEMO/src/main/resources/templates/sys
+    path: /Users/lyc/workspace/SpringbootDEMO/src/main/resources/templates/sys
   java:
-    path: F:/lkk/SpringbootDEMO/src/main/java/com/jiopeel/sys
+    path: /Users/lyc/workspace/SpringbootDEMO/src/main/java/com/jiopeel/sys

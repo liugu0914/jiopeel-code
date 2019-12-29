@@ -5,7 +5,18 @@ package com.lyc.sys;
  */
 public class Constant {
 
-    public static final Long  FILE_MAX_SIZE=1024*1024*50L;
 
-    public static final String  FILE_MAX_SIZE_STR="50M";
+    public static final String  FILE_DIVISION="/";
+
+    public static final String  FILE_JAVA=".java";
+
+    public static final String  FILE_XML=".xml";
+
+    public static final String  FILE_FTL=".ftl";
+
+    public static final String JAVA = "/java/";
+
+    public static final String HTML = "/html/";
+
+
 }

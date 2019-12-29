@@ -16,7 +16,7 @@ import java.util.Date;
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
-public class ${javaName!''} extends Bean implements Serializable {
+public class ${sys.beanName!''} extends Bean implements Serializable {
 
     private static final long serialVersionUID = ${serial.bean!''}L;
     <#list columns?if_exists as colum>

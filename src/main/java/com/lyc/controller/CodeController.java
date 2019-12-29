@@ -1,5 +1,6 @@
 package com.lyc.controller;
 
+import com.lyc.bean.Base;
 import com.lyc.service.CodeService;
 import com.lyc.bean.Sys;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +43,12 @@ public class CodeController {
      */
     @ResponseBody
     @PostMapping("/submit")
-    public String submit(@ModelAttribute Sys sys) throws Exception {
-        codeService.submit(sys);
-        return "index";
+    public Base submit(@ModelAttribute Sys sys)  {
+        boolean flag = codeService.submit(sys);
+        Base base = new Base();
+        base.setResult(flag);
+        base.setMessage(base.isResult()?"文件生成成功":"文件生成失败");
+        return base;
     }
 
 }
