@@ -13,14 +13,14 @@ spring:
 #  company: com.jiopeel  #公司名
 #  view:
 #    suffix: .html  #生成模板的后缀
-#    path: F:/lkk/SpringbootDEMO/src/main/resources/templates/sys
+#    path: F:\lkk\SpringbootDEMO\src\main\resources\templates\sys
 #  java:
-#    path: F:/lkk/SpringbootDEMO/src/main/java/com/jiopeel/sys
+#    path: F:\lkk\SpringbootDEMO\src\main\java\com\jiopeel\sys
 code:
   author: lyc
   company: com.jiopeel  #公司名
   view:
     suffix: .html  #生成模板的后缀
-    path: /Users/lyc/workspace/SpringbootDEMO/src/main/resources/templates/sys
+    path: \Users\lyc\workspace\SpringbootDEMO\src\main\resources\templates\sys
   java:
-    path: /Users/lyc/workspace/SpringbootDEMO/src/main/java/com/jiopeel/sys
+    path: \Users\lyc\workspace\SpringbootDEMO\src\main\java\com\jiopeel\sys

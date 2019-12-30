@@ -9,7 +9,9 @@ public class Path {
     }
 
     public Path(Sys sys) {
-        String javaPath = sys.getJavaPath(), viewPath = sys.getViewPath(),beanName = sys.getBeanName(),
+        String javaPath = sys.getJavaPath().replace("\\",Constant.FILE_DIVISION),
+                viewPath = sys.getViewPath().replace("\\",Constant.FILE_DIVISION),
+                beanName = sys.getBeanName(),
                 lowbeannam = sys.getLowbeanName(), suffix = sys.getSuffix(),
                 company=sys.getCompany().replace(".",Constant.FILE_DIVISION);
         this.bean = javaPath + Constant.FILE_DIVISION+"bean";
