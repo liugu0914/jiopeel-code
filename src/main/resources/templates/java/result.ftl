@@ -1,10 +1,7 @@
-<#assign pkgname=(path.bean)?replace('/',".")>
-<#assign start=pkgname?index_of(sys.company)>
-<#assign pkgname=pkgname?substring(start)>
+<#assign pkgname=(path.resultPath)?replace(('.'+javaName),"")>
 package ${pkgname!''};
 
-import ${sys.company!''}.core.bean.Bean;
-import ${path.bean!''};
+import ${path.beanPath!''};
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +12,7 @@ import java.io.Serializable;
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
-public class ${javaName!''} extends ${JavaNameMap.result} implements Serializable {
+public class ${javaName!''} extends ${JavaNameMap.bean} implements Serializable {
 
     private static final long serialVersionUID = ${serial.result!''}L;
 

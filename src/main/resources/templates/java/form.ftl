@@ -1,29 +1,19 @@
-<#assign pkgname=(path.bean)?replace('/',".")>
-<#assign start=pkgname?index_of(sys.company)>
-<#assign pkgname=pkgname?substring(start)>
+<#assign pkgname=(path.formPath)?replace(('.'+javaName),"")>
 package ${pkgname!''};
 
-import ${sys.company!''}.core.bean.Bean;
+import ${path.beanPath!''};
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
-* @description：${sys.des!''}
+* @description：${sys.des!''}表单层
 * @author     ：${sys.author!''}
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
-public class ${sys.beanName!''} extends Bean implements Serializable {
+public class ${javaName!''} extends ${JavaNameMap.bean} implements Serializable {
 
-    private static final long serialVersionUID = ${serial.bean!''}L;
-    <#list columns?if_exists as colum>
-    /**
-    * ${colum.remark!''}
-    */
-    private ${colum.columnType!''} ${colum.columnName!''};
-    </#list>
+    private static final long serialVersionUID = ${serial.form!''}L;
 
 }

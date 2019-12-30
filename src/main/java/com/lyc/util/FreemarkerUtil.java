@@ -13,6 +13,7 @@ public class FreemarkerUtil {
     private static FreemarkerUtil util;
     private static Configuration cfg;
     private static final String TEMPLATE = "/templates";
+    private static final String UTF_8 = "utf-8";
 
     public FreemarkerUtil() {
     }
@@ -24,7 +25,6 @@ public class FreemarkerUtil {
         if (util == null) {
             cfg = new Configuration(Configuration.VERSION_2_3_28);
             cfg.setClassForTemplateLoading(FreemarkerUtil.class, TEMPLATE);
-            cfg.setDefaultEncoding("utf-8");
             util = new FreemarkerUtil();
         }
         return util;
@@ -36,7 +36,7 @@ public class FreemarkerUtil {
      */
     private Template getTemplate(String fname) {
         try {
-            return cfg.getTemplate(fname);
+            return cfg.getTemplate(fname,UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,6 @@ public class FreemarkerUtil {
     public void sPrint(Map map, String fname) {
         try {
             Template template = getTemplate(fname);
-            template.setEncoding("utf-8");
             template.process(map, new PrintWriter(System.out));
         } catch (TemplateException e) {
             e.printStackTrace();
@@ -71,8 +70,7 @@ public class FreemarkerUtil {
     public void fPrint(Map<String, Object> map, String fname, String outpath) {
         try {
             Template template = getTemplate(fname);
-            template.setEncoding("utf-8");
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outpath)), "utf-8"));
+            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outpath)), UTF_8));
             template.process(map, out);
             out.flush();
             out.close();

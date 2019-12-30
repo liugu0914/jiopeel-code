@@ -39,6 +39,16 @@ public class Sys {
     private  String javaPath;
 
     /**
+     * 生成后端代码
+     */
+    private  String backEnd;
+
+    /**
+     * 生成前端代码
+     */
+    private  String frontEnd;
+
+    /**
      * 表名
      */
     private  String tabName;

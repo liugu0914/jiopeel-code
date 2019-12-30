@@ -1,6 +1,4 @@
-<#assign pkgname=(path.bean)?replace('/',".")>
-<#assign start=pkgname?index_of(sys.company)>
-<#assign pkgname=pkgname?substring(start)>
+<#assign pkgname=(path.constantPath)?replace(('.'+javaName),"")>
 package ${pkgname!''};
 
 /**

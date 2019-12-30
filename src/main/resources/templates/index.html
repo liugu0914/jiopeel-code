@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8"/>
-    <title>Jiopeel Code</title>
+    <title>Jiopeel Code by lyc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
     <meta content="Coderthemes" name="author"/>
@@ -11,6 +11,11 @@
     <link href="bootstrap/css/app.min.css" rel="stylesheet" type="text/css"/>
     <link href="bootstrap/css/message.css" rel="stylesheet" type="text/css"/>
 </head>
+<style>
+    .lh {
+        line-height: 24px!important;
+    }
+</style>
 <body>
 
 <div class="wrapper">
@@ -20,7 +25,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h2><code>Jiopeel.com</code>&nbsp;&nbsp;代码生成器</h2>
+                        <h2><a href="#" class="text-info"><code>Jiopeel.com</code></a>&nbsp;&nbsp;代码生成器</h2>
                         <h4><code>Design by lyc</code></h4>
                         <p class="text-muted">
                             简介： 你可以在此处生成代码
@@ -33,13 +38,24 @@
                                         </button>
                                     </div>
                                     <div class="form-group mb-3">
+                                        <label>代码生成选择</label>
+                                        <div class="input-group">
+                                            <input type="checkbox" name="backEnd" id="backEnd" checked="" data-switch="success">
+                                            <label for="backEnd" data-on-label="Yes" data-off-label="No"></label>
+                                            <span class="pl-1 pr-4  text-nowrap lh"> 生成后端代码 </span>
+                                            <input type="checkbox" name="frontEnd" id="frontEnd" checked="" data-switch="success">
+                                            <label for="frontEnd" data-on-label="Yes" data-off-label="No"></label>
+                                            <span class="pl-1 pr-4  text-nowrap lh"> 生成前端代码 </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
                                         <label for="tabName">表名</label>
                                         <select id="tabName" name="tabName" class="form-control">
-                                            <#list tabs?if_exists as tab>
+                                            [#list tabs?if_exists as tab]
                                             <option value="${(tab.tableName)!''}" des="${(tab.tableComment)!''}">
-                                                ${(tab.tableName)!''}
+                                                ${(tab.tableName)!''}[#if tab.tableComment?? && tab.tableComment!=''](${(tab.tableComment)!''})[/#if]
                                             </option>
-                                        </#list>
+                                            [/#list]
                                         </select>
                                         <input type="hidden" id="des" name="des" value="">
                                         <span class="help-block">
@@ -71,14 +87,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="viewPath">模板文件输出路径</label>
+                                        <label for="viewPath">前端文件输出路径</label>
                                         <div class="input-group">
                                             <input type="text" id="viewPath" name="viewPath" class="form-control"
                                                    value="${sys.viewPath!''}">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="suffix">模板后缀</label>
+                                        <label for="suffix">前端文件后缀</label>
                                         <input type="text" id="suffix" name="suffix" class="form-control"
                                                placeholder="placeholder" value="${sys.suffix!''}">
                                     </div>
@@ -129,7 +145,7 @@
             return under;
         },
         submit: function () {
-            Ajax.post("/submit", $('#form').serialize(), Code.suc, Code.err);
+            Ajax.post("/submit", Ajax.serializeObject($('#form')), Code.suc, Code.err);
         },
         suc: function (res) {
             Msg.isSuc(res.message,res.result);

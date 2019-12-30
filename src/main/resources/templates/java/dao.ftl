@@ -1,6 +1,4 @@
-<#assign pkgname=(path.bean)?replace('/',".")>
-<#assign start=pkgname?index_of(sys.company)>
-<#assign pkgname=pkgname?substring(start)>
+<#assign pkgname=(path.daoPath)?replace(('.'+javaName),"")>
 package ${pkgname!''};
 
 import ${sys.company!''}.core.dao.BaseDao;
@@ -13,6 +11,6 @@ import org.springframework.stereotype.Repository;
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Repository
-public class ${javaName!''} extends BaseDao<${javaName!''}>  {
+public class ${javaName!''} extends BaseDao<${JavaNameMap.bean!''}>  {
 
 }

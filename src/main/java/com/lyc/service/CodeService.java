@@ -14,6 +14,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,14 @@ public class CodeService {
      * @date ：2019/12/27 17:04
      */
     public List<Table> queryAlltable() {
+//        Connection conn = null;
+//        try {
+//            conn =  dao.getSqlSession().getConfiguration().getEnvironment().getDataSource().getConnection();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        String dbType = getDBType(conn);
+//        log.info("dbType : {}",dbType);
         List<Table> tabs = dao.query("core.all_table");
         return tabs;
     }
@@ -51,7 +60,7 @@ public class CodeService {
      * @return String
      */
     private String getDBType(Connection connection) {
-        String dbType = "mysql";
+        String dbType = "";
         //通过driverName是否包含关键字判断
         try {
             if (connection.getMetaData().getDriverName().toUpperCase().indexOf("MYSQL") != -1) {
@@ -62,6 +71,7 @@ public class CodeService {
                 dbType = "oracle";
             }
         } catch (Exception e) {
+            dbType="mysql";
             e.printStackTrace();
         }
         return dbType;
@@ -106,11 +116,16 @@ public class CodeService {
                 continue;
             name = name.replace("File", "");
             if (JavaNameMap.containsKey(name))
-                map.put("javaName",JavaNameMap.get(name));
+                map.put("javaName", JavaNameMap.get(name));
             field.setAccessible(true);
             String obj = String.valueOf(getFieldVal(field, path));
             log.info(obj);
-            freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
+            //后端
+            if (Constant.ON.equals(sys.getBackEnd()) && obj.endsWith(Constant.FILE_JAVA))
+                freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
+            //前端
+            if (Constant.ON.equals(sys.getFrontEnd()) && obj.endsWith(sys.getSuffix()))
+                freemarkerUtil.sPrint(map, Constant.HTML + name + Constant.FILE_FTL);
 //            freemarkerUtil.javaPrint(map,name+Constant.FILE_FTL,obj);
         }
     }
@@ -138,7 +153,7 @@ public class CodeService {
             String name = field.getName();
             field.setAccessible(true);
             String obj = String.valueOf(getFieldVal(field, path));
-            if (name.endsWith("File")){
+            if (name.endsWith("File")) {
                 name = name.replace("File", "");
                 javaName = obj.substring(obj.lastIndexOf(Constant.FILE_DIVISION) + 1)
                         .replace(Constant.FILE_JAVA, "")
