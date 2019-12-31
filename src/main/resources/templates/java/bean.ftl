@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-* @description：${sys.des!''}
+* @description：${sys.des!''}实体层
 * @author     ：${sys.author!''}
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */

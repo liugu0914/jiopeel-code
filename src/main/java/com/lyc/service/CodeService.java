@@ -14,7 +14,6 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +70,7 @@ public class CodeService {
                 dbType = "oracle";
             }
         } catch (Exception e) {
-            dbType="mysql";
+            dbType = "mysql";
             e.printStackTrace();
         }
         return dbType;
@@ -218,17 +217,19 @@ public class CodeService {
      */
     private List<Column> handleJavacolums(List<Column> colums) {
         for (Column colum : colums) {
-            String columnType = colum.getColumnType();
+            String columnType = colum.getColumnType().toLowerCase();
             if (columnType.indexOf("varchar") > -1 || columnType.indexOf("text") > -1) {
                 columnType = "String";
             } else if (columnType.indexOf("int") > -1) {
                 columnType = "Integer";
+            } else if (columnType.indexOf("float") > -1 || columnType.indexOf("double") > -1) {
+                columnType = "Double";
+            } else if (columnType.indexOf("bigint") > -1) {
+                columnType = "Long";
             } else if (columnType.indexOf("datetime") > -1) {
                 columnType = "Date";
             } else if (columnType.indexOf("decimal") > -1) {
                 columnType = "BigDecimal";
-            } else if (columnType.indexOf("float") > -1 || columnType.indexOf("double") > -1) {
-                columnType = "Double";
             }
             colum.setColumnType(columnType);
             colum.setColumnName(colum.getColumnName());
