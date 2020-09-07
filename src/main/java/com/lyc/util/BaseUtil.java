@@ -374,9 +374,9 @@ public class BaseUtil {
     public static Field[] getAllFields(Object object) {
         Class clazz = object.getClass();
         List<Field> fieldList = new ArrayList<Field>();
-        while (clazz!=null){
+        while (clazz != null) {
             fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
-            clazz=clazz.getSuperclass();
+            clazz = clazz.getSuperclass();
         }
         Field[] fields = new Field[fieldList.size()];
         fieldList.toArray(fields);
@@ -390,7 +390,7 @@ public class BaseUtil {
         StringBuilder sBuffer = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < len; i++) {
-            sBuffer.append(random.nextInt(9)+1);
+            sBuffer.append(random.nextInt(9) + 1);
         }
         return sBuffer.toString();
     }
@@ -416,20 +416,22 @@ public class BaseUtil {
      */
     public static String under2camel(String s) {
         String separator = "_";
-        String under = "";
+        StringBuilder under = new StringBuilder();
         s = s.toLowerCase().replace(separator, " ");
         String sarr[] = s.split(" ");
         for (int i = 0; i < sarr.length; i++) {
-            String w = sarr[i].substring(0, 1).toUpperCase() + sarr[i].substring(1);
-            under += w;
+            String w = sarr[i];
+            if (i != 0)
+                w = w.substring(0, 1).toUpperCase() + w.substring(1);
+            under.append(w);
         }
-        return under;
+        return under.toString();
     }
 
     /**
      * 将list拆分
      *
-     * @param items    查询条件
+     * @param items 查询条件
      * @param steps 划分大小
      * @return 拆分之后的结果
      * @auhor:lyc
@@ -437,9 +439,9 @@ public class BaseUtil {
      */
     public static <E> List<List<E>> splitList(List<E> items, int steps) {
         List<List<E>> beans = new ArrayList<>(steps);
-        if (items==null || items.isEmpty())
-            return  beans;
-        if(steps<=0 || steps>=Integer.MAX_VALUE)
+        if (items == null || items.isEmpty())
+            return beans;
+        if (steps <= 0 || steps >= Integer.MAX_VALUE)
             return beans;
         int len = items.size();
         int[] nums = new int[len / steps + ((len % steps == 0) ? 0 : 1)];

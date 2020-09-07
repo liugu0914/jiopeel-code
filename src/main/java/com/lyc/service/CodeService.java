@@ -117,7 +117,7 @@ public class CodeService {
             String obj = String.valueOf(getFieldVal(field, path));
             if (!chkName(sys, name))
                 continue;
-            log.info(obj);
+            log.info("生成文件: "+obj);
             //java
             if (obj.endsWith(Constant.FILE_JAVA) || obj.endsWith(Constant.FILE_XML)) {
 //                freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
@@ -140,7 +140,8 @@ public class CodeService {
         sys.setEventPath(cp(sys.getEventPath()));
         sys.setLogicPath(cp(sys.getLogicPath()));
         sys.setViewPath(cp(sys.getViewPath()));
-        sys.setLowBeanName(sys.getBeanName().toLowerCase());//mapper ， html
+        String table = sys.getTabName().replace("t_","");
+        sys.setLowBeanName(BaseUtil.under2camel(table));//mapper ， html
 
         String viewPath = sys.getViewPath();
         if (!Constant.YES.equals(sys.getBean()) && !Constant.YES.equals(sys.getEvent())
@@ -170,7 +171,7 @@ public class CodeService {
                 continue;
             File file = new File(obj);
             if (!file.exists()) {
-                log.info(file.getPath());
+                log.info("创建文件夹: "+file.getPath());
                 file.mkdirs();
             }
         }

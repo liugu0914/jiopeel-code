@@ -265,7 +265,7 @@
             });
         },
         under2camel: function (s) {
-            var separator = "_";
+            var separator = /_/g;
             var under = "";
             s = s.toLowerCase().replace(separator, " ");
             var sarr = s.split(" ");
