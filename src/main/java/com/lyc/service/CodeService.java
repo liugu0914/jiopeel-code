@@ -74,15 +74,20 @@ public class CodeService {
      * @param sys
      * @return String
      */
-    public boolean submit(Sys sys) {
+    public Base submit(Sys sys) {
+        Base base = new Base();
+        boolean flag =true;
         try {
             Path path = handlePath(sys);
             doPrint(sys, path);
+            base.setMessage("文件生成成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            flag =false;
+            base.setMessage(e.getMessage());
         }
-        return true;
+        base.setResult(flag);
+        return base;
     }
 
     /**
@@ -110,9 +115,9 @@ public class CodeService {
                 map.put("javaName", JavaNameMap.get(name));
             field.setAccessible(true);
             String obj = String.valueOf(getFieldVal(field, path));
-            log.info(obj);
             if (!chkName(sys, name))
                 continue;
+            log.info(obj);
             //java
             if (obj.endsWith(Constant.FILE_JAVA) || obj.endsWith(Constant.FILE_XML)) {
 //                freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
@@ -131,19 +136,15 @@ public class CodeService {
      * @param sys
      */
     private Path handlePath(Sys sys) throws Exception {
-        String beanPath = sys.getBeanPath();
-        String eventPath = sys.getEventPath();
-        String logicPath = sys.getLogicPath();
-
-        sys.setBeanPath(cp(beanPath));
-        sys.setEventPath(cp(eventPath));
-        sys.setLogicPath(cp(logicPath));
+        sys.setBeanPath(cp(sys.getBeanPath()));
+        sys.setEventPath(cp(sys.getEventPath()));
+        sys.setLogicPath(cp(sys.getLogicPath()));
         sys.setViewPath(cp(sys.getViewPath()));
         sys.setLowBeanName(sys.getBeanName().toLowerCase());//mapper ， html
 
         String viewPath = sys.getViewPath();
-        if (BaseUtil.empty(beanPath) && BaseUtil.empty(eventPath)
-                && BaseUtil.empty(logicPath) && BaseUtil.empty(viewPath))
+        if (!Constant.YES.equals(sys.getBean()) && !Constant.YES.equals(sys.getEvent())
+                && !Constant.YES.equals(sys.getLogic()) && !Constant.YES.equals(sys.getView()))
             throw new Exception("不可都为空");
         String htmlUri = viewPath.substring(viewPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
         sys.setHtmlUri(htmlUri);

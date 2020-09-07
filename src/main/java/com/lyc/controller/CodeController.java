@@ -54,11 +54,7 @@ public class CodeController {
     @ResponseBody
     @PostMapping("/submit")
     public Base submit(@ModelAttribute Sys sys)  {
-        boolean flag = codeService.submit(sys);
-        Base base = new Base();
-        base.setResult(flag);
-        base.setMessage(base.isResult()?"文件生成成功":"文件生成失败");
-        return base;
+        return codeService.submit(sys);
     }
 
 }
