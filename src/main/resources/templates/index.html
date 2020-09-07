@@ -110,8 +110,9 @@
 </div>
 
 
-<script src="/bootstrap/js/app.min.js"></script>
+<script src="/bootstrap/js/jquery.js"></script>
 <script src="/bootstrap/js/ajax.js"></script>
+<script src="/bootstrap/js/select2.min.js"></script>
 <script src="/bootstrap/js/message.js"></script>
 <script>
     $(function () {
@@ -132,6 +133,9 @@
             $('#sumbtn').click(function () {
                 Code.submit();
             });
+            $('#tabName').select2({
+                minimumResultsForSearch: -1
+            })
         },
         under2camel: function (s) {
             var separator = "_";
