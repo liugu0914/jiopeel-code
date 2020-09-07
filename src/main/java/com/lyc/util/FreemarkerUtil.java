@@ -68,29 +68,47 @@ public class FreemarkerUtil {
      * @param outpath 输出路径
      */
     public void fPrint(Map<String, Object> map, String fname, String outpath) {
+        Writer out =null;
         try {
             Template template = getTemplate(fname);
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outpath)), UTF_8));
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outpath)), UTF_8));
             template.process(map, out);
-            out.flush();
-            out.close();
         } catch (TemplateException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                out.flush();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
 
     /**
-     * 文件输出
+     * java文件输出
      *
      * @param map     参数设置
      * @param fname   模板文件
      * @param outpath 输出路径
      */
     public void javaPrint(Map<String, Object> map, String fname, String outpath) {
-        fname = Constant.JAVA + fname.replaceFirst("/", "");
+        fname = Constant.JAVA + fname.replaceFirst("/", "") + Constant.FILE_FTL;
+        fPrint(map, fname, outpath);
+    }
+
+    /**
+     * html文件输出
+     *
+     * @param map     参数设置
+     * @param fname   模板文件
+     * @param outpath 输出路径
+     */
+    public void htmlPrint(Map<String, Object> map, String fname, String outpath) {
+        fname = Constant.HTML + fname.replaceFirst("/", "") + Constant.FILE_FTL;
         fPrint(map, fname, outpath);
     }
 }

@@ -387,10 +387,10 @@ public class BaseUtil {
      * 产生随机数
      */
     public static String getRandom(int len) {
-        StringBuffer sBuffer = new StringBuffer();
+        StringBuilder sBuffer = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < len; i++) {
-            sBuffer.append(random.nextInt(10));
+            sBuffer.append(random.nextInt(9)+1);
         }
         return sBuffer.toString();
     }

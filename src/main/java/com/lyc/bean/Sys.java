@@ -27,26 +27,49 @@ public class Sys {
     private  String suffix;
 
     /**
+     * 是否生产模板文件 1是 0否
+     */
+    private  String view;
+
+    /**
      * 输出的模板路径
      */
     @Value("${code.view.path}")
     private  String viewPath;
 
-    /**
-     * 输出的java路径
-     */
-    @Value("${code.java.path}")
-    private  String javaPath;
 
     /**
-     * 生成后端代码
+     * 是否生产bean文件 1是 0否
      */
-    private  String backEnd;
+    private  String bean;
 
     /**
-     * 生成前端代码
+     * 输出的bean路径
      */
-    private  String frontEnd;
+    @Value("${code.java.beanPath}")
+    private  String beanPath;
+
+    /**
+     * 是否生产event文件 1是 0否
+     */
+    private  String event;
+
+    /**
+     * 输出的event路径
+     */
+    @Value("${code.java.eventPath}")
+    private  String eventPath;
+
+    /**
+     * 是否生产logic文件 1是 0否
+     */
+    private  String logic;
+
+    /**
+     * 输出的logic路径
+     */
+    @Value("${code.java.logicPath}")
+    private  String logicPath;
 
     /**
      * 表名
@@ -66,16 +89,17 @@ public class Sys {
     /**
      * 小写实例名称
      */
-    private  String lowbeanName;
+    private  String lowBeanName;
 
     /**
-     * java uri
+     * url 前缀
      */
-    private  String javauri;
+    @Value("${code.view.urlPrefix}")
+    private  String urlPrefix;
 
     /**
-     * java uri
+     * html uri
      */
-    private  String htmluri;
+    private  String htmlUri;
 
 }

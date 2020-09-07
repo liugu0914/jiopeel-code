@@ -38,16 +38,8 @@ public class CodeService {
      * @author ：lyc
      * @date ：2019/12/27 17:04
      */
-    public List<Table> queryAlltable() {
-//        Connection conn = null;
-//        try {
-//            conn =  dao.getSqlSession().getConfiguration().getEnvironment().getDataSource().getConnection();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        String dbType = getDBType(conn);
-//        log.info("dbType : {}",dbType);
-        List<Table> tabs = dao.query("core.all_table");
+    public List<Table> queryAlltable(String search) {
+        List<Table> tabs = dao.query("core.all_table",search);
         return tabs;
     }
 
@@ -119,55 +111,157 @@ public class CodeService {
             field.setAccessible(true);
             String obj = String.valueOf(getFieldVal(field, path));
             log.info(obj);
-            //后端
-            if (Constant.ON.equals(sys.getBackEnd()) && obj.endsWith(Constant.FILE_JAVA))
-                freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
-            //前端
-            if (Constant.ON.equals(sys.getFrontEnd()) && obj.endsWith(sys.getSuffix()))
-                freemarkerUtil.sPrint(map, Constant.HTML + name + Constant.FILE_FTL);
-//            freemarkerUtil.javaPrint(map,name+Constant.FILE_FTL,obj);
+            if (!chkName(sys, name))
+                continue;
+            //java
+            if (obj.endsWith(Constant.FILE_JAVA) || obj.endsWith(Constant.FILE_XML)) {
+//                freemarkerUtil.sPrint(map, Constant.JAVA + name + Constant.FILE_FTL);
+                freemarkerUtil.javaPrint(map,name,obj);
+            }
+            //html
+            if (obj.endsWith(sys.getSuffix())) {
+//                freemarkerUtil.sPrint(map, Constant.HTML + name + Constant.FILE_FTL);
+                freemarkerUtil.htmlPrint(map,name,obj);
+            }
         }
     }
 
     /**
      * 处理路径
-     *
      * @param sys
      */
     private Path handlePath(Sys sys) throws Exception {
-        String javaPath = sys.getJavaPath();
+        String beanPath = sys.getBeanPath();
+        String eventPath = sys.getEventPath();
+        String logicPath = sys.getLogicPath();
+
+        sys.setBeanPath(cp(beanPath));
+        sys.setEventPath(cp(eventPath));
+        sys.setLogicPath(cp(logicPath));
+        sys.setViewPath(cp(sys.getViewPath()));
+        sys.setLowBeanName(sys.getBeanName().toLowerCase());//mapper ， html
+
         String viewPath = sys.getViewPath();
-        Assert.isNull(javaPath, "java输出路径不存在");
-        Assert.isNull(viewPath, "模板输出路径不存在");
-        String javauri = javaPath.substring(javaPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
-        String htmluri = viewPath.substring(viewPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
-        sys.setJavauri(javauri);
-        sys.setHtmluri(htmluri);
-        sys.setLowbeanName(sys.getBeanName().toLowerCase());//mapper ， html
+        if (BaseUtil.empty(beanPath) && BaseUtil.empty(eventPath)
+                && BaseUtil.empty(logicPath) && BaseUtil.empty(viewPath))
+            throw new Exception("不可都为空");
+        String htmlUri = viewPath.substring(viewPath.lastIndexOf(Constant.FILE_DIVISION) + 1);
+        sys.setHtmlUri(htmlUri);
+
         Path path = new Path(sys);
         Field[] fields = BaseUtil.getAllFields(path);
-        String javaName = "";
+        String javaName;
         Map<String, Object> JavaNameMap = new HashMap<String, Object>();
         for (Field field : fields) {
             String name = field.getName();
             field.setAccessible(true);
             String obj = String.valueOf(getFieldVal(field, path));
             if (name.endsWith("File")) {
-                name = name.replace("File", "");
+                String filename = name.replace("File", "");
                 javaName = obj.substring(obj.lastIndexOf(Constant.FILE_DIVISION) + 1)
                         .replace(Constant.FILE_JAVA, "")
                         .replace(sys.getSuffix(), "");
-                JavaNameMap.put(name, javaName);
+                JavaNameMap.put(filename, javaName);
             }
             if (name.endsWith("File") || name.endsWith("Path"))
+                continue;
+            if (!chkName(sys, name))
                 continue;
             File file = new File(obj);
             if (!file.exists()) {
                 log.info(file.getPath());
-//                file.mkdirs();
+                file.mkdirs();
             }
         }
         map.put("JavaNameMap", JavaNameMap);
+        return path;
+    }
+
+    /**
+     * 检测是否可导出
+     * @param sys
+     * @param name
+     * @return boolean
+     */
+    public boolean chkName(Sys sys, String name) {
+        boolean flag = false;
+        if (Constant.YES.equals(sys.getBean()) && isBean(name))
+            flag = true;
+        if (Constant.YES.equals(sys.getEvent()) && isEvent(name))
+            flag = true;
+        if (Constant.YES.equals(sys.getLogic()) && isLogic(name))
+            flag = true;
+        if (Constant.YES.equals(sys.getView()) && isView(name))
+            flag = true;
+        return flag;
+    }
+
+    /**
+     * 是否包含字符串
+     * @param name
+     * @param array
+     * @return boolean
+     */
+    public boolean containsList(String name, String... array) {
+        boolean flag = false;
+        if (array == null || array.length == 0)
+            return false;
+        for (String str : array) {
+            if (name.contains(str)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 是否为bean
+     * @param name
+     * @return boolean
+     */
+    public boolean isBean(String name) {
+        return containsList(name, "bean", "result", "form", "query");
+    }
+
+    /**
+     * 是否为Event
+     * @param name
+     * @return boolean
+     */
+    public boolean isEvent(String name) {
+        return containsList(name, "event");
+    }
+
+    /**
+     * 是否为Logic
+     * @param name
+     * @return boolean
+     */
+    public boolean isLogic(String name) {
+        return containsList(name, "logic", "dao", "mapper");
+    }
+
+    /**
+     * 是否为View
+     * @param name
+     * @return boolean
+     */
+    public boolean isView(String name) {
+        return containsList(name, "html");
+    }
+
+    /**
+     * 处理路径
+     * @param path
+     * @return boolean
+     */
+    public String cp(String path) {
+        if (BaseUtil.empty(path))
+            return path;
+        path = path.replace("\\", Constant.FILE_DIVISION);
+        if (path.endsWith(Constant.FILE_DIVISION))
+            path = path.substring(0, path.length() - 1);
         return path;
     }
 
@@ -210,7 +304,7 @@ public class CodeService {
     }
 
     /**
-     * 处理java类型
+     * 处理java类型 默认包装类型
      *
      * @param colums
      * @return List<Column>
@@ -218,21 +312,20 @@ public class CodeService {
     private List<Column> handleJavacolums(List<Column> colums) {
         for (Column colum : colums) {
             String columnType = colum.getColumnType().toLowerCase();
-            if (columnType.indexOf("varchar") > -1 || columnType.indexOf("text") > -1) {
+            if (containsList(columnType,"char","text")) {
                 columnType = "String";
-            } else if (columnType.indexOf("int") > -1) {
-                columnType = "Integer";
-            } else if (columnType.indexOf("float") > -1 || columnType.indexOf("double") > -1) {
-                columnType = "Double";
-            } else if (columnType.indexOf("bigint") > -1) {
+            } else if (containsList(columnType,"bigint","numeric")) {
                 columnType = "Long";
-            } else if (columnType.indexOf("datetime") > -1) {
+            } else if (containsList(columnType,"float","double")) {
+                columnType = "Double";
+            } else if (containsList(columnType,"int")) {
+                columnType = "Integer";
+            } else if (containsList(columnType,"date")) {
                 columnType = "Date";
-            } else if (columnType.indexOf("decimal") > -1) {
+            } else if (containsList(columnType,"decimal")) {
                 columnType = "BigDecimal";
             }
             colum.setColumnType(columnType);
-            colum.setColumnName(colum.getColumnName());
         }
         return colums;
     }

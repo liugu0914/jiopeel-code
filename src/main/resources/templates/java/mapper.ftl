@@ -1,29 +1,16 @@
-<#assign pkgname=(path.bean)?replace('/',".")>
-<#assign start=pkgname?index_of(sys.company)>
-<#assign pkgname=pkgname?substring(start)>
-package ${pkgname!''};
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${sys.lowBeanName}">
+    <select id="getInfo" parameterType="String" resultType="${JavaNameMap.result}">
+        select * from t_app where id=<#noparse>#{_paramer}</#noparse>
+    </select>
 
-import ${sys.company!''}.core.bean.Bean;
-import lombok.Data;
+    <select id="getListPage" parameterType="${JavaNameMap.query}" resultType="${JavaNameMap.result}">
+        select * from t_app  t where 1=1
+    </select>
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-
-/**
-* @description：${sys.des!''}
-* @author     ：${sys.author!''}
-* @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
-*/
-@Data
-public class ${sys.beanName!''} extends Bean implements Serializable {
-
-    private static final long serialVersionUID = ${serial.bean!''}L;
-    <#list columns?if_exists as colum>
-    /**
-    * ${colum.remark!''}
-    */
-    private ${colum.columnType!''} ${colum.columnName!''};
-    </#list>
-
-}
+    <select id="list" parameterType="${JavaNameMap.query}" resultType="${JavaNameMap.result}">
+        select * from t_app where 1=1
+    </select>
+</mapper>

@@ -10,6 +10,10 @@
             information_schema. TABLES
             WHERE
             table_schema = DATABASE ()
+            <if test="!@com.lyc.util.BaseUtil@empty(_parameter)">
+                <bind name="_parameter" value="'%'+_parameter+'%'"/>
+                and table_name like #{_parameter}
+            </if>
             ORDER BY table_name
     </select>
 

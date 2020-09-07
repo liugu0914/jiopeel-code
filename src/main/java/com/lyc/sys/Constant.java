@@ -18,5 +18,7 @@ public class Constant {
 
     public static final String HTML = "/html/";
 
-    public static final String ON = "on";
+    public static final String ON = "0";
+
+    public static final String YES = "1";
 }

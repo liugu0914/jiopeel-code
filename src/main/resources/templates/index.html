@@ -13,7 +13,7 @@
 </head>
 <style>
     .lh {
-        line-height: 24px!important;
+        line-height: 24px !important;
     }
 </style>
 <body>
@@ -37,25 +37,67 @@
                                         <button type="button" id="sumbtn" class="btn btn-success col-lg-12">Submit
                                         </button>
                                     </div>
-                                    <div class="form-group mb-3">
-                                        <label>代码生成选择</label>
-                                        <div class="input-group">
-                                            <input type="checkbox" name="backEnd" id="backEnd" checked="" data-switch="success">
-                                            <label for="backEnd" data-on-label="Yes" data-off-label="No"></label>
-                                            <span class="pl-1 pr-4  text-nowrap lh"> 生成后端代码 </span>
-                                            <input type="checkbox" name="frontEnd" id="frontEnd" checked="" data-switch="success">
-                                            <label for="frontEnd" data-on-label="Yes" data-off-label="No"></label>
-                                            <span class="pl-1 pr-4  text-nowrap lh"> 生成前端代码 </span>
+                                    <div class="card-header">
+                                        <h4>生成后端代码</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="alert alert-primary bg-white text-primary">
+                                                    <span>Bean</span>
+                                                    <div class="close" style="opacity: 1">
+                                                        <input type="checkbox" id="bean" onchange="Code.check(this)"
+                                                               checked value="1" name="bean" data-switch="primary">
+                                                        <label for="bean" data-on-label="是" data-off-label="否"
+                                                               class="mb-0 d-block"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="alert alert-success bg-white text-success">
+                                                    <span>Event</span>
+                                                    <div class="close" style="opacity: 1">
+                                                        <input type="checkbox" id="event" onchange="Code.check(this)"
+                                                               checked value="1" name="event" data-switch="success">
+                                                        <label for="event" data-on-label="是" data-off-label="否"
+                                                               class="mb-0 d-block"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="alert alert-info bg-white text-info">
+                                                    <span>Logic</span>
+                                                    <div class="close" style="opacity: 1">
+                                                        <input type="checkbox" id="logic" onchange="Code.check(this)"
+                                                               checked value="1" name="logic" data-switch="info">
+                                                        <label for="logic" data-on-label="是" data-off-label="否"
+                                                               class="mb-0 d-block"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-header">
+                                        <h4>生成前端代码 </h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="alert alert-warning bg-white text-warning">
+                                                    <span>模板</span>
+                                                    <div class="close" style="opacity: 1">
+                                                        <input type="checkbox" id="view" onchange="Code.check(this)"
+                                                               checked value="1" name="view" data-switch="warning">
+                                                        <label for="view" data-on-label="是" data-off-label="否"
+                                                               class="mb-0 d-block"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="tabName">表名</label>
-                                        <select id="tabName" name="tabName" class="form-control">
-                                            [#list tabs?if_exists as tab]
-                                            <option value="${(tab.tableName)!''}" des="${(tab.tableComment)!''}">
-                                                ${(tab.tableName)!''}[#if tab.tableComment?? && tab.tableComment!=''](${(tab.tableComment)!''})[/#if]
-                                            </option>
-                                            [/#list]
+                                        <select id="tabName" name="tabName" class="form-control" data-url="/getTables">
                                         </select>
                                         <input type="hidden" id="des" name="des" value="">
                                         <span class="help-block">
@@ -80,18 +122,45 @@
                                                placeholder="实例名称">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="javaPath">Java文件输出路径</label>
+                                        <label for="beanPath">
+                                            <span class="badge badge-primary-lighten badge-pill">Bean</span>
+                                            文件输出路径</label>
                                         <div class="input-group">
-                                            <input type="text" id="javaPath" name="javaPath" class="form-control"
-                                                   value="${sys.javaPath!''}">
+                                            <input type="text" id="beanPath" name="beanPath" class="form-control"
+                                                   value="${sys.beanPath!''}">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="viewPath">前端文件输出路径</label>
+                                        <label for="eventPath">
+                                            <span class="badge badge-success-lighten badge-pill">Event</span>
+                                            文件输出路径</label>
+                                        <div class="input-group">
+                                            <input type="text" id="eventPath" name="eventPath" class="form-control"
+                                                   value="${sys.eventPath!''}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="logicPath">
+                                            <span class="badge badge-info-lighten badge-pill">Logic</span>
+                                            文件输出路径</label>
+                                        <div class="input-group">
+                                            <input type="text" id="logicPath" name="logicPath" class="form-control"
+                                                   value="${sys.logicPath!''}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="viewPath">
+                                            <span class="badge badge-warning-lighten badge-pill">模板</span>
+                                            文件输出路径</label>
                                         <div class="input-group">
                                             <input type="text" id="viewPath" name="viewPath" class="form-control"
                                                    value="${sys.viewPath!''}">
                                         </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="suffix">Url前缀</label>
+                                        <input type="text" id="urlPrefix" name="urlPrefix" class="form-control"
+                                               placeholder="placeholder" value="${sys.urlPrefix!''}">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="suffix">前端文件后缀</label>
@@ -120,22 +189,80 @@
     });
     var Code = {
         init: function () {
-            $('#tabName').on('change', function (event) {
-                var $this = $(event.target);
-                var name = $this.val().replace("t_", "");
+            var $this = $('#tabName');
+            $this.on('change', function (event) {
+                var ele = $(event.target);
+                var name = ele.val().replace("t_", "");
                 $('#beanName').val(Code.under2camel(name));
-                var des = $this.find("option:selected").attr("des");
-                $this.parent().find('small').text(des);
+                var des = ele.select2("data")[0].tableComment;
+                ele.parent().find('small').text(des);
                 $('#des').val(des);
             });
-            $('#tabName').trigger('change');
 
             $('#sumbtn').click(function () {
                 Code.submit();
             });
-            $('#tabName').select2({
-                minimumResultsForSearch: -1
-            })
+            var op = {
+                placeholder: '请选择',
+                ajax: {
+                    url: $this.data('url'),
+                    delay: 250,
+                    data: function data(params) {
+                        var query = {
+                            search: params.term
+                        };
+                        query = $.extend(query, $this.data());
+                        return query;
+                    },
+                    dataType: Ajax.JSON,
+                    type: Ajax.GET,
+                    processResults: function processResults(result) {
+                        var data = [];
+
+                        if (result.data) {
+                            data = $.map(result.data, function (obj) {
+                                var tableName = obj.tableName;
+                                obj.id = tableName;
+                                var tableComment = obj.tableComment;
+                                tableComment = tableComment ? "(" + tableComment + ")" : "";
+                                obj.text = tableName + tableComment;
+                                return obj;
+                            });
+                        }
+
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                templateSelection: formatState,
+                templateResult: formatState,
+                minimumInputLength: 0,
+                maximumSelectionLength: 100
+            };
+
+            function formatState(state) {
+                var pattern = /<(?:[^"'>]|"[^"]*"|'[^']*')*>/g;
+
+                if (!state.id) {
+                    return state.text;
+                }
+
+                return state.text && pattern.test(state.text) ? $(state.text) : state.text;
+            }
+
+            $this.select2(op);
+        },
+        check: function (ele) {
+            var $this = $(ele);
+            var flag = $this.prop('checked');
+            $this.val(flag ? '1' : '0');
+            var name = $this.attr('name');
+            var path = name + 'Path';
+            var $path = $('#' + path).closest('.form-group');
+            $path.css({
+                display: flag ? 'block' : 'none'
+            });
         },
         under2camel: function (s) {
             var separator = "_";
@@ -149,10 +276,12 @@
             return under;
         },
         submit: function () {
+            if(!$('#tabName').val())
+                return Msg.warn("请先选择表名");
             Ajax.post("/submit", Ajax.serializeObject($('#form')), Code.suc, Code.err);
         },
         suc: function (res) {
-            Msg.isSuc(res.message,res.result);
+            Msg.isSuc(res.message, res.result);
         },
         err: function (XMLHttpRequest) {
             Msg.error("失败请求");

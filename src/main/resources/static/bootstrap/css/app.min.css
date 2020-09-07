@@ -13354,7 +13354,7 @@ input[data-switch] + label:after {
 }
 
 input[data-switch]:checked + label {
-    background-color: #727cf5
+    background-color: #0acf97
 }
 
 input[data-switch]:checked + label:before {

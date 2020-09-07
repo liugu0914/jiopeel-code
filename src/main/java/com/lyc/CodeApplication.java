@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Date: 2019/9/29 17:07
  */
 @Slf4j
-@EnableTransactionManagement
 @SpringBootApplication
 public class CodeApplication {
 

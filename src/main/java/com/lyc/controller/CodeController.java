@@ -6,12 +6,10 @@ import com.lyc.bean.Sys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @Package: com.lyc.controller
@@ -33,9 +31,21 @@ public class CodeController {
      */
     @GetMapping("/")
     public String index(Model model)  {
-        model.addAttribute("tabs",codeService.queryAlltable());
         model.addAttribute("sys",sys);
         return "index";
+    }
+
+    /**
+     * 表
+     */
+    @ResponseBody
+    @GetMapping("/getTables")
+    public Base getTables(@RequestParam(value = "search",required = false) String search)  {
+        Base base = new Base();
+        base.setResult(true);
+        base.setData(codeService.queryAlltable(search));
+        base.setMessage("成功");
+        return base;
     }
 
     /**

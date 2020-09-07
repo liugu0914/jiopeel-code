@@ -6,7 +6,7 @@ import ${path.beanPath!''};
 import org.springframework.stereotype.Repository;
 
 /**
-* @description：${sys.des!''}DAO层实现
+* @description：${sys.des!''} DAO层实现
 * @author     ：${sys.author!''}
 * @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
