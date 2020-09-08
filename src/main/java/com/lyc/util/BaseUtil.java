@@ -389,8 +389,12 @@ public class BaseUtil {
     public static String getRandom(int len) {
         StringBuilder sBuffer = new StringBuilder();
         Random random = new Random();
+        long z = Math.round(Math.random());
+        if (z == 0)
+            sBuffer.append("-");
         for (int i = 0; i < len; i++) {
-            sBuffer.append(random.nextInt(9) + 1);
+            int num = i==0? random.nextInt(9) + 1 :random.nextInt(10);
+            sBuffer.append(num);
         }
         return sBuffer.toString();
     }

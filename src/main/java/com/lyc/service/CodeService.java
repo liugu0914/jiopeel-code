@@ -140,7 +140,7 @@ public class CodeService {
         sys.setEventPath(cp(sys.getEventPath()));
         sys.setLogicPath(cp(sys.getLogicPath()));
         sys.setViewPath(cp(sys.getViewPath()));
-        String table = sys.getTabName().replace("t_","");
+        String table = sys.getTabName().replaceFirst("t_","");
         sys.setLowBeanName(BaseUtil.under2camel(table));//mapper ， html
 
         String viewPath = sys.getViewPath();

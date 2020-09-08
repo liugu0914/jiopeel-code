@@ -5,12 +5,11 @@
                 <div class="card-body pb-2">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <form action="${sys.urlPrefix}/${sys.lowBeanName}/${path.htmlMainPath}">
+                            <form action="${sys.urlPrefix}/${sys.lowBeanName}/${path.htmlDataPath}">
                                 <div class="row align-items-end">
                                     <div class="col-md-10">
                                         <div class="row">
                                             <#list columns?if_exists as colum>
-                                                private ${colum.columnType!''} ${colum.columnName!''};
                                                 <div class="col-sm-4 col-lg-3 mb-2">
                                                     <label>${colum.remark!''}</label>
                                                     <input class="form-control" type="text" name="${colum.columnName!''}"/>

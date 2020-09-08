@@ -15,9 +15,9 @@ public class Serial {
     private String query;
 
     public Serial(){
-        this.bean=BaseUtil.getRandom(19);
-        this.result=BaseUtil.getRandom(19);
-        this.form=BaseUtil.getRandom(19);
-        this.query=BaseUtil.getRandom(19);
+        this.bean=BaseUtil.getRandom(18);
+        this.result=BaseUtil.getRandom(18);
+        this.form=BaseUtil.getRandom(18);
+        this.query=BaseUtil.getRandom(18);
     }
 }

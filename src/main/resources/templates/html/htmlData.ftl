@@ -66,7 +66,7 @@
                         </#if>
                         </#list>
                         <td>
-                            <a href=${sys.urlPrefix}/${sys.lowBeanName}/${path.htmlInfoPath}" target="modal" data-id="<#noparse>${bean.id}</#noparse>" show="tooltip"  data-title="编辑">
+                            <a href="${sys.urlPrefix}/${sys.lowBeanName}/${path.htmlInfoPath}" target="modal" data-id="<#noparse>${bean.id}</#noparse>" show="tooltip"  data-title="编辑">
                                 <i class="cs cs-bianji"></i>
                             </a>
                             <a href="${sys.urlPrefix}/${sys.lowBeanName}/del" target="ajax" data-id="<#noparse>${bean.id}</#noparse>" data-warn="确认删除数据?"  show="tooltip" data-title="删除">
