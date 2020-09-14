@@ -102,6 +102,7 @@ public class ${javaName!''} extends BaseEvent {
     * @author: ${sys.author!''}
     * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
+    @ResponseBody
     @RequestMapping(value = "getListPage", method = {RequestMethod.POST})
     public Base getListPage(@ModelAttribute ${JavaNameMap.query} query, Page<${JavaNameMap.result}> page) {
         return Base.suc(logic.getListPage(query,page));
@@ -113,6 +114,7 @@ public class ${javaName!''} extends BaseEvent {
     * @author: ${sys.author!''}
     * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
+    @ResponseBody
     @RequestMapping(value = "getList", method = {RequestMethod.POST})
     public Base list() {
         return Base.suc(logic.list());
