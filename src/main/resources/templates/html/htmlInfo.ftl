@@ -44,7 +44,7 @@
         isEnable: function (ele) {
             var $this = $(ele);
             var val = $this.prop('checked');
-            var $name = $('[name="enable"]', '#blogSys_info');
+            var $name = $('[name="enable"]', '#${sys.lowBeanName}_info');
             $name.val(val ? '1' : '0');
         }
     }
