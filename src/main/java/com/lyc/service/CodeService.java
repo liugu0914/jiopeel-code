@@ -314,6 +314,8 @@ public class CodeService {
     private List<Column> handleJavacolums(List<Column> colums) {
         for (Column colum : colums) {
             String columnType = colum.getColumnType().toLowerCase();
+            String columnName = colum.getColumnName();
+            colum.setColumnName(BaseUtil.under2camel(columnName));
             if (containsList(columnType,"char","text")) {
                 columnType = "String";
             } else if (containsList(columnType,"bigint","numeric")) {
