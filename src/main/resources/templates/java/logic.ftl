@@ -21,9 +21,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* @description：${sys.des!''} Logic层
-* @author     ：${sys.author!''}
-* @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
+* ${sys.des!''} Logic层
+* @author     ${sys.author!''}
+* @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Slf4j
 @Service

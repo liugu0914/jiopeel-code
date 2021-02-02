@@ -7,9 +7,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
-* @description：${sys.des!''}表单层
-* @author     ：${sys.author!''}
-* @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
+* ${sys.des!''}表单层
+* @author     ${sys.author!''}
+* @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
 public class ${javaName!''} extends ${JavaNameMap.bean} implements Serializable {

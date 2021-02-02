@@ -19,9 +19,9 @@ import java.io.Serializable;
 <#if hasDecimal>import java.math.BigDecimal;</#if>
 
 /**
-* @description：${sys.des!''} 实体层
-* @author     ：${sys.author!''}
-* @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
+* ${sys.des!''} 实体层
+* @author     ${sys.author!''}
+* @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
 public class ${javaName} extends Bean implements Serializable {

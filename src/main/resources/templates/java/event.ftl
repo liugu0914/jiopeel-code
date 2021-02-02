@@ -17,9 +17,9 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 /**
-* @description：${sys.des!''} Event层
-* @author     ：${sys.author!''}
-* @date       ：${.now?string("yyyy-MM-dd HH:mm:ss")}
+* ${sys.des!''} Event层
+* @author     ${sys.author!''}
+* @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Controller
 @RequestMapping("${sys.urlPrefix}/${sys.lowBeanName}")
