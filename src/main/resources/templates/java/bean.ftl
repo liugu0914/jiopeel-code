@@ -14,7 +14,6 @@ package ${pkgname!''};
 import ${sys.company!''}.core.bean.Bean;
 import lombok.Data;
 
-import java.io.Serializable;
 <#if hasDate>import java.util.Date;</#if>
 <#if hasDecimal>import java.math.BigDecimal;</#if>
 
@@ -24,7 +23,7 @@ import java.io.Serializable;
 * @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
-public class ${javaName} extends Bean implements Serializable {
+public class ${javaName} extends Bean {
 
     private static final long serialVersionUID = ${serial.bean}L;
 
