@@ -34,10 +34,10 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 根据id获取应用信息与数据库一致
-    * @param ：id
-    * @return：${sys.beanName}
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   id
+    * @return  ${sys.beanName}
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     public ${JavaNameMap.bean} get(String id) {
         ${JavaNameMap.bean} bean = new ${JavaNameMap.bean}();
@@ -48,10 +48,10 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 根据id获取应用信息 自定义
-    * @param : id
-    * @return: ${JavaNameMap.result}
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   id
+    * @return  ${JavaNameMap.result}
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     public ${JavaNameMap.result} getInfo(String id) {
         ${JavaNameMap.result} bean = new ${JavaNameMap.result}();
@@ -62,11 +62,11 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 获取分页列表数据
-    * @param : query 查询对象
-    * @param : page  分页器
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   query 查询对象
+    * @param   page  分页器
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     public Page<${JavaNameMap.result}> getListPage(${JavaNameMap.query} query, Page<${JavaNameMap.result}> page) {
         Page<${JavaNameMap.result}> PageList = dao.queryPageList("${sys.lowBeanName}.getListPage", query, page);
@@ -76,9 +76,9 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 根据搜索条件查询数据
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     public List<${JavaNameMap.result}> list() {
         List<${JavaNameMap.result}> list = dao.query("${sys.lowBeanName}.list");
@@ -87,10 +87,10 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 保存数据
-    * @param : form 表单提交对象
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   form 表单提交对象
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @Transactional(rollbackFor = {Exception.class, ServerException.class})
     public Base save(${JavaNameMap.form} form) {
@@ -115,10 +115,10 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 删除
-    * @param : ids
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   ids
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @Transactional(rollbackFor = {Exception.class, ServerException.class})
     public Base del(String ids) {
@@ -132,9 +132,9 @@ public class ${javaName!''} extends BaseLogic {
 
     /**
     * 检查对象数据
-    * @param : form 表单提交对象
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   form 表单提交对象
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     private void CheckBean(${JavaNameMap.form} form) {
         Assert.isNull(form, "对象不能为空");

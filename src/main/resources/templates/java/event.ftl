@@ -30,9 +30,9 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 获取查询主页面
-    * @return: String
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @return  String
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @RequestMapping(value = "${path.htmlMainPath}", method = {RequestMethod.GET})
     public String main() {
@@ -41,12 +41,12 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 获取分页列表数据
-    * @param : query 查询数据
-    * @param : page 分页数据
-    * @param : model 模型域
-    * @return: String
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   query 查询数据
+    * @param   page 分页数据
+    * @param   model 模型域
+    * @return  String
+    * @author  ${sys.author!''}
+    * @date   ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @RequestMapping(value = "${path.htmlDataPath}", method = {RequestMethod.POST})
     public String data(@ModelAttribute ${JavaNameMap.query} query, Page<${JavaNameMap.result}> page, Model model) {
@@ -57,10 +57,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 添加或修改页面
-    * @param : model 模型域
-    * @return: String
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   model 模型域
+    * @return  String
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @RequestMapping(value = "${path.htmlInfoPath}", method = {RequestMethod.POST})
     public String info(Model model) {
@@ -71,10 +71,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 根据id获取数据
-    * @param : id
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   id
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "get/{id}", method = {RequestMethod.GET})
@@ -84,10 +84,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 根据id获取数据
-    * @param : id
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   id
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "getInfo/{id}", method = {RequestMethod.GET})
@@ -97,10 +97,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 获取分页列表数据
-    * @param : query
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   query
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "getListPage", method = {RequestMethod.POST})
@@ -110,9 +110,9 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 获取列表数据
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @Date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "getList", method = {RequestMethod.POST})
@@ -122,10 +122,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 保存
-    * @param : form
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   form
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "save", method = {RequestMethod.POST})
@@ -135,10 +135,10 @@ public class ${javaName!''} extends BaseEvent {
 
     /**
     * 删除
-    * @param : ids
-    * @return: Base
-    * @author: ${sys.author!''}
-    * @Date  : ${.now?string("yyyy-MM-dd HH:mm:ss")}
+    * @param   ids
+    * @return  Base
+    * @author  ${sys.author!''}
+    * @date    ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @ResponseBody
     @RequestMapping(value = "del", method = {RequestMethod.POST})
