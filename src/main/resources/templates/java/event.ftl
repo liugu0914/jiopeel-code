@@ -32,8 +32,8 @@ public class ${javaName!''} extends BaseEvent {
     *
     * @param queryPage 分页参数
     * @return Base
-    * @author lyc
-    * @Date 2021年3月1日17:00:40
+    * @author ${sys.author!''}
+    * @Date  ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @PostMapping("getListPage")
     public Base<Page<${JavaNameMap.result}>> getListPage(@RequestBody QueryPage<${JavaNameMap.query}, ${JavaNameMap.result}> queryPage) {
@@ -45,8 +45,8 @@ public class ${javaName!''} extends BaseEvent {
     * 获取分页列表数据
     *
     * @return Base
-    * @author lyc
-    * @Date 2021年3月1日17:00:40
+    * @author ${sys.author!''}
+    * @Date  ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @GetMapping("getList")
     public Base<List<${JavaNameMap.result}>> getList() {
@@ -59,8 +59,8 @@ public class ${javaName!''} extends BaseEvent {
     *
     * @param id Id
     * @return Base
-    * @author lyc
-    * @date 2021年3月1日17:04:10
+    * @author ${sys.author!''}
+    * @date  ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @GetMapping("getOneById")
     public Base<${JavaNameMap.result}> getOneById(@RequestParam("id") String id) {
@@ -72,8 +72,8 @@ public class ${javaName!''} extends BaseEvent {
     *
     * @param form 表单数据
     * @return Base
-    * @author lyc
-    * @date 2021年3月1日17:04:10
+    * @author ${sys.author!''}
+    * @date  ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @PostMapping("save")
     public Base save(@RequestBody ${JavaNameMap.form} form) {
@@ -85,8 +85,8 @@ public class ${javaName!''} extends BaseEvent {
     *
     * @param ids id集合
     * @return Base
-    * @author lyc
-    * @date 2021年3月1日17:04:10
+    * @author ${sys.author!''}
+    * @date  ${.now?string("yyyy-MM-dd HH:mm:ss")}
     */
     @GetMapping("del")
     public Base del(@RequestParam("ids") String ids) {
