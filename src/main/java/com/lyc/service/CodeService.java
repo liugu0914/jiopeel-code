@@ -241,7 +241,7 @@ public class CodeService {
      * @return boolean
      */
     public boolean isLogic(String name) {
-        return containsList(name, "logic", "dao", "mapper");
+        return containsList(name, "logic","impl", "dao", "mapper");
     }
 
     /**

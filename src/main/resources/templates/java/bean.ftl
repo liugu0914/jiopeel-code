@@ -12,7 +12,10 @@
 package ${pkgname!''};
 
 import ${sys.company!''}.core.bean.Bean;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 
 <#if hasDate>import java.util.Date;</#if>
 <#if hasDecimal>import java.math.BigDecimal;</#if>
@@ -23,6 +26,7 @@ import lombok.Data;
 * @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ${javaName} extends Bean {
 
     private static final long serialVersionUID = ${serial.bean}L;
@@ -31,6 +35,7 @@ public class ${javaName} extends Bean {
     /**
     * ${colum.remark!''}
     */
+    @ApiModelProperty("${colum.remark!''}")
     private ${colum.columnType!''} ${colum.columnName!''};
     </#list>
 

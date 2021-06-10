@@ -3,6 +3,7 @@ package ${pkgname!''};
 
 import ${path.beanPath!''};
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -11,6 +12,7 @@ import lombok.Data;
 * @date       ${.now?string("yyyy-MM-dd HH:mm:ss")}
 */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ${javaName!''} extends ${JavaNameMap.bean} {
 
     private static final long serialVersionUID = ${serial.result!''}L;

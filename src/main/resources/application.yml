@@ -5,20 +5,20 @@ spring:
     #数据源类型
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lyc?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.0.29:3306/hx-sq?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: admin123
 code:
   author: lyc
   company: com.jiopeel  #公司名
   view:
-    urlPrefix: /admin
+    urlPrefix:
     suffix: .html  #生成模板的后缀
     path: F:\webspace\jiopeel-parent\jiopeel-admin-web\src\main\resources\templates\blog
   java:
-    beanPath: F:\webspace\jiopeel-parent\jiopeel-bean\src\main\java\com\jiopeel\bean\blog
-    eventPath: F:\webspace\jiopeel-parent\jiopeel-admin\src\main\java\com\jiopeel\event\blog
-    logicPath: F:\webspace\jiopeel-parent\jiopeel-logic\src\main\java\com\jiopeel\logic\blog
+    beanPath: D:\workspace\psims-create-sq\jiopeel-project\jiopeel-project-bean\src\main\java\com\jiopeel\project
+    eventPath: D:\workspace\psims-create-sq\jiopeel-project\jiopeel-project-mc\src\main\java\com\jiopeel\project\event
+    logicPath: D:\workspace\psims-create-sq\jiopeel-project\jiopeel-project-mc\src\main\java\com\jiopeel\project
 #code:
 #  author: lyc
 #  company: com.jiopeel  #公司名

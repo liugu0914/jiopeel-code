@@ -43,16 +43,20 @@ public class Path {
 
         // ============ logic =============
         this.dao = logicPath + Constant.FILE_DIVISION + "dao";
-        this.daoFile = this.dao + Constant.FILE_DIVISION + beanName + "Dao" + Constant.FILE_JAVA;
+        this.daoFile = this.dao + Constant.FILE_DIVISION + beanName + "Mapper" + Constant.FILE_JAVA;
         this.daoPath = this.daoFile.substring(this.daoFile.indexOf(company))
                 .replace(Constant.FILE_DIVISION, ".").replace(Constant.FILE_JAVA, "");
         this.mapper = this.dao + Constant.FILE_DIVISION + "mapper";
-        this.mapperFile = this.mapper + Constant.FILE_DIVISION + LowBeanName + Constant.FILE_XML;
+        this.mapperFile = this.mapper + Constant.FILE_DIVISION + beanName + "Mapper" + Constant.FILE_XML;
         this.mapperPath = this.mapperFile.substring(this.mapperFile.indexOf(company))
                 .replace(Constant.FILE_DIVISION, ".").replace(Constant.FILE_JAVA, "");
         this.logic = logicPath + Constant.FILE_DIVISION + "logic";
         this.logicFile = this.logic + Constant.FILE_DIVISION + beanName + "Logic" + Constant.FILE_JAVA;
         this.logicPath = this.logicFile.substring(this.logicFile.indexOf(company))
+                .replace(Constant.FILE_DIVISION, ".").replace(Constant.FILE_JAVA, "");
+        this.logicImpl = this.logic+ Constant.FILE_DIVISION + "impl";
+        this.logicImplFile = this.logicImpl + Constant.FILE_DIVISION + beanName + "LogicImpl" + Constant.FILE_JAVA;
+        this.logicImplPath = this.logicImplFile.substring(this.logicImplFile.indexOf(company))
                 .replace(Constant.FILE_DIVISION, ".").replace(Constant.FILE_JAVA, "");
 
         // ============ 模板 =============
@@ -112,6 +116,12 @@ public class Path {
     private String logicFile;
 
     private String logicPath;
+
+    private String logicImpl;
+
+    private String logicImplFile;
+
+    private String logicImplPath;
 
     private String html;
 
