@@ -28,6 +28,6 @@
              INFORMATION_SCHEMA. COLUMNS
             WHERE table_schema=DATABASE()
             and table_name=#{_paramerter}
-            and COLUMN_NAME not in ('id','ctime','updtime')
+            and COLUMN_NAME not in ('id','create_time','update_time')
     </select>
 </mapper>

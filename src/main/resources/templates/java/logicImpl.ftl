@@ -79,7 +79,7 @@ public class ${javaName!''} extends BaseLogic implements ${JavaNameMap.logic}{
     */
     @Override
     public Page<${JavaNameMap.result}> getListPage(QueryPage<${JavaNameMap.query},${JavaNameMap.result}> queryPage) {
-        Page<${JavaNameMap.result}> PageList = beanDao.queryPageList("${path.mapperPath}.getListPage", queryPage);
+        Page<${JavaNameMap.result}> PageList = beanDao.queryPageList("${path.daoPath}.getListPage", queryPage);
         return PageList;
     }
 
